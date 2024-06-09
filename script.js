@@ -14,7 +14,7 @@ var complex = true;
 $(function () {
   $("body").css("overflow", "unset");
 
-  var $container = $(".anim-container");
+  var $container = $(".render-container");
 
   var $charMapPicker = $(".chartMapPicker");
   $charMapPicker.change(function () {
@@ -42,13 +42,14 @@ $(function () {
   var canvasWidth = 1;
   var contrast = 1.3;
   var blackPoint = 1.3;
-  var fontSize = 6;
+  var initialFontSize = 6;
+  var fontSize = initialFontSize;
   var prevFontSize = fontSize;
 
   var canvas = undefined;
-  $("body").css("font-size", fontSize + "px");
+  $container.css("font-size", fontSize + "px");
+  $container.css("line-height", fontSize + "px");
 
-  $(".font-size").val(fontSize);
   $(".black-point").val(blackPoint);
   $(".contrast").val(contrast);
   $(".scale").val(initialHeight);
@@ -59,14 +60,11 @@ $(function () {
   });
   $(".scale").on("input", function () {
     canvasHeight = $(this).val() * 1;
+    fontSize = (100 * initialFontSize) / $(this).val() * 1;
     imageLoaded();
   });
-  $(".font-size").on("input", function () {
-    fontSize = $(this).val();
-    draw();
-  });
   $(".contrast").on("input", function () {
-    contrast = $(this).val();
+    contrast = $(this).val() * 1;
     draw();
   });
   $(".custom-map").on("input", function () {
@@ -139,7 +137,8 @@ $(function () {
     var output = "";
 
     if (fontSize != prevFontSize) {
-      $("body").css("font-size", fontSize + "px");
+      $container.css("font-size", fontSize + "px");
+      $container.css("line-height", fontSize + "px");
       prevFontSize = fontSize;
     }
 
