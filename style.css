@@ -1,11 +1,10 @@
 body {
     font-size: 10px;
-    /* color: #a3bac7; */
-    /* background: #13153c; */
     margin: 0px;
     overflow: hidden;
     line-height: 1em;
     text-rendering: geometricPrecision;
+    text-align: center;
 }
 
 html {
